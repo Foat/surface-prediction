@@ -57,3 +57,9 @@ Acknowledgment:
 Patrick Denis for the York Database (see paper for detail)
 Frédéric Devernay for CMINPACK
 Peter Kovesi for some inspiration on the edge detection code and the function lineseg2.m
+
+
+Important!
+
+Some changes have been made to run the code under opencv 2.4.9 and OS X 10.9+
+by Foat Akhmadeev.

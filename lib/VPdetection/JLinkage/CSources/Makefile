@@ -21,7 +21,7 @@ mexJLinkage.$(MEX_SUFFIX): mexJLinkage.cpp $(ALLDEP)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
 	@echo $(MEX_LDFLAGS)
-	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -o $@
+	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -output $@
 
 
 mexPLinkage.$(MEX_SUFFIX): mexPLinkage.cpp $(ALLDEP)
@@ -29,7 +29,7 @@ mexPLinkage.$(MEX_SUFFIX): mexPLinkage.cpp $(ALLDEP)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
 	@echo $(MEX_LDFLAGS)
-	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -o $@
+	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -output $@
 
 
 linkageIntersect.$(MEX_SUFFIX): linkageIntersect.cpp $(ALLDEP)
@@ -37,16 +37,17 @@ linkageIntersect.$(MEX_SUFFIX): linkageIntersect.cpp $(ALLDEP)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
 	@echo $(MEX_LDFLAGS)
-	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -o $@
+	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -output $@
 
 pDistJaccard.$(MEX_SUFFIX): pDistJaccard.cpp $(ALLDEP)
 	@echo $(strDiv)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
 	@echo $(MEX_LDFLAGS)
-	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -o $@
+	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -output $@
 
 
 clean:
-	rm -f *$(MEX_SUFFIX) *.o 
+	rm -f *$(MEX_SUFFIX) *.o
+	rm -f *$(MEX_SUFFIX) *.mex*
 

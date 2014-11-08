@@ -9,9 +9,9 @@ include ../Makefile.spec
 
 strDiv		:= "======================================================================="
 mexfile 	:= mxEdgelink.$(MEX_SUFFIX) mxGetEdges.$(MEX_SUFFIX)
-exefile 	:= mxGetEdges
+#exefile 	:= mxGetEdges
 
-all: $(mexfile) $(exefile)
+all: $(mexfile)
 
 
 mxEdgelink.$(MEX_SUFFIX): mxEdgelink.cpp $(ALLDEP)
@@ -19,14 +19,14 @@ mxEdgelink.$(MEX_SUFFIX): mxEdgelink.cpp $(ALLDEP)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
 	@echo $(MEX_LDFLAGS)
-	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -o $@
+	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB   $< -output $@
 
 mxGetEdges.$(MEX_SUFFIX): mxGetEdges.cpp $(ALLDEP)
 	@echo $(strDiv)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
 	@echo $(MEX_LDFLAGS)
-	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB    $< -o $@ 
+	$(MEX) CXX=$(MEX_CXX) $(MEX_CXXFLAGS) $(CXXFLAGS) $(MEX_LDFLAGS) -DMATLAB    $< -output $@ 
 
 
 mxGetEdges: mxGetEdges.cpp $(ALLDEP)
@@ -34,9 +34,10 @@ mxGetEdges: mxGetEdges.cpp $(ALLDEP)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
 	@echo $(LDFLAGS)
-	$(CXX)  $(CXXFLAGS) $(LDFLAGS)     $< -o $@  
+	$(CXX)  $(CXXFLAGS) $(LDFLAGS)     $< -output $@  
 
 
 clean:
-	rm -f *$(MEX_SUFFIX) *.o 
+	rm -f *$(MEX_SUFFIX) *.o
+	rm -f *$(MEX_SUFFIX) *.mex*
 

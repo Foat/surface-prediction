@@ -29,42 +29,43 @@ FACADE_mxFitL_x_constVP.$(MEX_SUFFIX): FACADE_mxFitL_x_constVP.cpp $(ALLDEP)
 	@echo $(strDiv)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
-	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -o $@
+	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -output $@
 
 FACADE_mxFitL_x_constVP_MLE.$(MEX_SUFFIX): FACADE_mxFitL_x_constVP_MLE.c $(ALLDEP)
 	@echo $(strDiv)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
-	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -o $@
+	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -output $@
 
 FACADE_mxFitVP_x_multiL.$(MEX_SUFFIX): FACADE_mxFitVP_x_multiL.c $(ALLDEP)
 	@echo $(strDiv)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
-	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -o $@
+	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -output $@
 
 
 FACADE_mxFitVP_x_GS.$(MEX_SUFFIX): FACADE_mxFitVP_x_GS.c $(ALLDEP)
 	@echo $(strDiv)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
-	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -o $@
+	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -output $@
 
 FACADE_mxFitVP_x_MAX.$(MEX_SUFFIX): FACADE_mxFitVP_x_MAX.c $(ALLDEP)
 	@echo $(strDiv)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
-	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -o $@
+	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -output $@
 
 FACADE_mxFitVP_x_MLE.$(MEX_SUFFIX): FACADE_mxFitVP_x_MLE.c $(ALLDEP)
 	@echo $(strDiv)
 	@echo "   MEX '$<' ==> '$@'"	
 	@echo ""
-	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -o $@
+	$(MEX) CXX=$(CXX) $(MEX_CFLAGS) $(CXXFLAGS) $(LDFLAGS)   $< -output $@
 
 
 clean:
 	rm -f *$(MEX_SUFFIX) *.o
+	rm -f *$(MEX_SUFFIX) *.mex*
 	for subdir in $(SUBDIRS); do\
 		(cd $$subdir && make clean)\
 	done

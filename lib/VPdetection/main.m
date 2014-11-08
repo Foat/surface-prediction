@@ -1,15 +1,18 @@
-function main(imgStr)
-
+function [vp,f,linesmore] = main(im,plot)
+if nargin==1
+    plot=0;
+end
 %includes
-addpath(genpath('JLinkage'));
-addpath 'lineSegDetect/'
-
 ARGS = FACADE_ARGS_default();
 const = FACADE_const();
 ARGS.mKinv = [];
 
+%read image
+diag = sqrt(size(im,1).^2 + size(im,2).^2);
+ARGS.minEdgeLength = ceil(diag/50);
+
 %arguments for Vanishing point detection
-ARGS.plot = 1; 
+ARGS.plot = plot; 
 ARGS.savePlot = false;%true;
 
 ARGS.manhattanVP = true;
@@ -26,13 +29,11 @@ ARGS.mK = [[focal,0,pp(1)];[0,focal,pp(2)];[0,0,1]];
 ARGS.mKinv = inv(ARGS.mK);
 %ARGS.imgS = norm([imgW/2,imgH/2]);
 ARGS.imgS = focal;
-ARGS.imgStr = imgStr;
+ARGS.imgStr = 'testimg';
 %------------------------------------------------------------------------------
 %                                Edges and VP
 %------------------------------------------------------------------------------
 %get data (edges)
-%read image
-im = imread(imgStr);
 im = rgb2gray(im);
 if ARGS.plot
   f1 = sfigure(1); clf; imshow(im);
@@ -66,8 +67,29 @@ end
 %vanishing point in image space are:
 VPimage = mToUh(ARGS.mK*[vsVP.VP]);
 
+%% return result for omap
+for i=1:3
+    vp{i}=VPimage(:,i)';
+end
+f=f123;
+edsize=length(vsEdges);
+linesmore = repmat(struct('point1', [0 0], 'point2', [0 0], 'length', 0.0,...
+    'lineclass',0,'id',0), edsize, 1);
+for i=1:edsize
+point1 = vsEdges(i).vPointUn1';
+point2 = vsEdges(i).vPointUn2';
+len = norm(point1 - point2);
+lc=vClass(i);
+if lc>3
+    lc=0;
+end
+linesmore(i) = struct('point1', point1, 'point2', point2, 'length', len,...
+    'lineclass',lc,'id',i);
+end
+
+%% plot result
 %this will plot the vanishing points that are inside the image
-sfigure(1);
-hold on
-plot(VPimage(1,1:3), VPimage(2,1:3), '*', 'MarkerSize', 20, 'Color', [1,1,0]);
-hold off
+% sfigure(1);
+% hold on
+% plot(VPimage(1,1:3), VPimage(2,1:3), '*', 'MarkerSize', 20, 'Color', [1,1,0]);
+% hold off

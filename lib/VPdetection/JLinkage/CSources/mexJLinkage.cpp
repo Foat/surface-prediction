@@ -17,6 +17,8 @@
     mexPrintf (format, ##__VA_ARGS__);          \
 }
 
+#define uint unsigned int
+
 
 //#define DEBUG
 

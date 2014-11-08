@@ -23,15 +23,17 @@
 #include <list>
 #include <sstream>
 
-#include <cv.h>
-#include <highgui.h>
+#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/core/core_c.h"
 #include <vector>
 
 #define uint8 unsigned char
+#define uint unsigned int
 #define WHITE 255
 #define BLACK 0
 //#define CANNY_THRESH 500
-#define CANNY_THRESH 700
+#define CANNY_THRESH 200
 #define CANNY_MASK   5
 
 //#define DEBUG
@@ -496,9 +498,11 @@ mexFunction(int nout, mxArray *out[],
       iplImgT[y][x] =  getColor(img,imgHeight, x,y);
 
   //get edge map
-  IplImage* iplEdge=cvCreateImage(cvSize(iplImg->width, iplImg->height),IPL_DEPTH_8U,1);
-  cvCanny(iplImg,iplEdge,CANNY_THRESH,CANNY_THRESH*2,CANNY_MASK); 
-
+  cv::Mat mat_img(iplImg);
+  cv::Mat m_edge;
+  
+  cv::Canny(mat_img,m_edge,CANNY_THRESH,CANNY_THRESH*4,CANNY_MASK);
+  IplImage* iplEdge = new IplImage(m_edge);
   //get edgelist
   //printf("Computing\n");
   std::vector< std::vector <CvPoint> > vComp = getEdgeGroup(iplEdge, minLength);
@@ -540,7 +544,7 @@ mexFunction(int nout, mxArray *out[],
     }
 
   
-  cvReleaseImage(&iplEdge);
+  delete iplEdge;
   cvReleaseImage(&iplImg);
 }
 
@@ -561,9 +565,13 @@ int main()
   char imgName[] = "../../YorkUrbainDB/P1020822/P1020822.jpg";
   //char imgName[] = "../../YorkUrbainDB/P1020171/P1020171.jpg";
   IplImage* iplImg    =cvLoadImage(imgName, 0);//grayscale loading
-  IplImage* iplEdge   =cvCreateImage(cvSize(iplImg->width, iplImg->height),IPL_DEPTH_8U,1);
+  IplImage* iplEdge = 0;
 
-  cvCanny(iplImg,iplEdge,CANNY_THRESH, 2*CANNY_THRESH,CANNY_MASK); 
+  cv::Mat mat_img(iplImg );
+  cv::Mat m_edge;
+  cv::Canny(mat_img,m_edge,CANNY_THRESH,CANNY_THRESH*4,CANNY_MASK); 
+  iplEdge = new IplImage(m_edge);
+
 #ifdef DEBUG
   cvSaveImage("edge.jpg", iplEdge);
 #endif

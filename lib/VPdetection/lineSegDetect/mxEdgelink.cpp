@@ -17,11 +17,13 @@
 #include <list>
 #include <sstream>
 
-#include <cv.h>
-#include <highgui.h>
+#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/core/core_c.h"
 #include <vector>
 
 #define __uint8 unsigned char
+#define uint unsigned int
 #define WHITE 255
 //#define GRAY 128
 #define BLACK 0
@@ -107,8 +109,12 @@ eliminateJunction(IplImage* iplImg, unsigned char edgC, unsigned char backC)
    Image<unsigned char> iplImgT(iplImg);
  
 
-  IplImage* iplIntImg = cvCreateImage( cvSize(W+1, H+1), IPL_DEPTH_32S, 1 );
-  cvIntegral(iplImg, iplIntImg,NULL, NULL );
+  IplImage* iplIntImg;// = cvCreateImage( cvSize(W+1, H+1), IPL_DEPTH_32S, 1 );
+
+  cv::Mat mat_img(iplImg );
+  cv::Mat integ;
+  cv::integral(mat_img, integ);
+  iplIntImg = new IplImage(integ);
   Image<int>  iplIntImgT(iplIntImg);
 
 
