@@ -1,17 +1,17 @@
-function lines = pkline(im)
+function lines = pkline(im, sigma, minlength)
 % http://www.csse.uwa.edu.au/~pk/research/matlabfns/
 
 % Find edges using the Canny operator with hysteresis thresholds of 0.1
 % and 0.2 with smoothing parameter sigma set to 1.
 % edgeim = edge(im,'canny', [0.1 0.2], 1);
-edgeim = edge(im,'canny',0.1);
+edgeim = edge(im,'canny', sigma, 1);
 % edgeim = edison_canny(im);
 
 % figure(1), imshow(edgeim); truesize(1)
 
 % Link edge pixels together into lists of sequential edge points, one
 % list for each edge contour.  Discard contours less than 10 pixels long.
-[edgelist, labelededgeim] = edgelink(edgeim, 30, 8);
+[edgelist, labelededgeim] = edgelink(edgeim, minlength, 8);
 
 % Display the labeled edge image with separate colours for each
 % distinct edge (choose your favorite colourmap!)
@@ -41,5 +41,5 @@ for i = 1:length(lines)
     lines(i).length = norm(lines(i).point1 - lines(i).point2);
 end
 linelen = [lines.length];
-lines = lines(linelen>30);
+lines = lines(linelen>minlength);
 

@@ -43,7 +43,7 @@ p2 = line.point2;
 curp1 = p1; curp2 = p2;
 move_amount = 128;
 while move_amount>=1
-    [newp1 newp2 atvp] = move_line_towards_vp(curp1, curp2, vp, towards_or_away * move_amount);
+    [newp1, newp2, atvp] = move_line_towards_vp(curp1, curp2, vp, towards_or_away * move_amount);
     
     failed = 0;
     if atvp==1
@@ -108,7 +108,7 @@ poly = [p1(:)'; p2(:)'; curp2(:)'; curp1(:)'];
 %%
 
 %%
-function [newp1 newp2 atvp] = move_line_towards_vp(linep1, linep2, vp, amount)
+function [newp1, newp2, atvp] = move_line_towards_vp(linep1, linep2, vp, amount)
 
 % d = dist_line_to_point(linep1, linep2, vp);
 % r = amount / d;

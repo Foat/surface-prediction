@@ -1,4 +1,4 @@
-function [omap omapstrict1 omapstrict2] = compute_orientationmap(lines, vp, imgsize, OMAP_FACTOR)
+function [omap, omapstrict1, omapstrict2] = compute_orientationmap(lines, vp, imgsize, OMAP_FACTOR)
 
 
 %% resize lines
@@ -6,7 +6,7 @@ lines_rsz = lines;
 for i = 1:length(lines)
     lines_rsz(i).point1 = lines_rsz(i).point1 * OMAP_FACTOR;
     lines_rsz(i).point2 = lines_rsz(i).point2 * OMAP_FACTOR;
-    lines_rsz(i).lineeq = lines_rsz(i).lineeq * OMAP_FACTOR;
+%     lines_rsz(i).lineeq = lines_rsz(i).lineeq * OMAP_FACTOR;
 end
 vp{1} = vp{1} * OMAP_FACTOR;
 vp{2} = vp{2} * OMAP_FACTOR;
