@@ -1,0 +1,118 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+SOURCE README FOR AUTOMATIC PHOTO POPUP AND GEOMETRIC CONTEXT 
+Derek Hoiem (dhoiem@cs.cmu.edu)
+01/08/2010
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+LICENSE
+
+Copyright (C) 2007 Derek Hoiem, Carnegie Mellon University
+
+This software is available for only non-commercial use.  See the attached
+license in LICENSE.txt.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+REFERENCES
+
+This code implements the following papers.  Note that the implementation may not be exact.
+Please cite one or more of these papers, depending on the use.
+
+D. Hoiem, A.A. Efros, and M. Hebert, "Geometric Context from a Single Image", ICCV 2005.
+
+D. Hoiem, A.A. Efros, and M. Hebert, "Recovering Surface Layout from an Image", IJCV, Vol. 75, No. 1, 
+October 2007.
+
+D. Hoiem, A.A. Efros, and M. Hebert, "Automatic Photo Pop-up", ACM SIGGRAPH 2005.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Note about VERSIONS
+
+This contains two versions of the "Automatic Photo Pop-up" and "Geometric 
+"Context" code.  The first version is from the SIGGRAPH 2005 / ICCV 2005 papers
+and involves the functions photoPopup and APPtestImage.  The second version
+is from the IJCV 2007 paper and involves the functions photoPopupIjcv and 
+ijcvTestImage.  Note that these implementations may not be exact.  In particular,
+some changes to features were made to improve speed, which may have small effects
+on accuracy.  Further, the multiple segmentation algorithm is random, so different
+runs will not produce identical results.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+How to RUN:
+
+
+First, appropriately replace the path for the segment command in im2superpixels.m.
+
+Geometric Context version 1 (ICCV 2005):
+  [labels, conf_map, maps, pmaps] = APPtestImage(image, imsegs, vClassifier, hClassifier, segDensity)
+      image should be a double color image
+      imsegs is the superpixel structure (if empty, will be computed)
+      The remaining three arguments are stored in data/classifiers_08_22_2005.mat 
+  
+  [labels, conf_map, imsegs] = ...
+    APPtestDirectory(segDensity, vClassifier, hClassifier, imdir, imfn, varargin)
+      Processes a directory of images with given filenames.  Optional last argument is where to 
+      store displayed results.
+
+
+Geometric Context version 2 (IJCV 2007):
+  [pg, data, imsegs] = ijcvTestImage(im, imsegs, classifiers, smaps, spdata, adjlist, edata);
+      The only required fields are im and classifiers.  
+      Example usage: 
+         load '../data/ijcvClassifier.mat'
+         [pg, data, imsegs] = ijcvTestImage(im, [], classifiers);
+      Classifiers trained on indoor and outdoor images are provided in the data directory.
+  
+  [pg, smaps, imsegs] = ijcvTestImageList(fn, imsegs, classifiers, laboutdir, confoutdir)
+      Processes all images whose names are given in fn.  As above, imsegs can be empty.
+
+
+Automatic Photo Pop-up (SIGGRAPH 2005, IJCV 2007)
+  photoPopup(fnData, fnImage, extSuperpixelImage, outdir)
+    This is the 2005 version.
+    fnData is the filename containing the classifiers (data/classifiers_08_22_2005.mat).
+    If extSuperpixelImage is empty, it will be computed.
+    
+  photoPopupIjcv(fnData, fnImage, extSuperpixelImage, outdir)
+    This is the IJCV 2007 version.  See notes above.
+
+
+Training:
+  For the IJCV version, see src/ijcv06/ijcvMultiSegScript.m
+  This function performs both training and evaluation.  It requires some edits.  It is currently
+  setup for cross-validation, but it should be straightforward to use separate train and test sets.
+  The Geometric Context Dataset (separate download) contains rand_indices which specifies the 
+  train/test splits.
+
+  
+Other useful functions:
+   src/util/splitpg.m
+   src/util/pg2confidenceImages.m
+   src/util/pg2*
+   src/util/write*
+   
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+NOTES:
+
+  Superpixels:
+  I use the segmentation code provided by Felzenszwalb and Huttenlocher
+  at people.cs.uchicago.edu/~pff/segment/ to create the superpixels in my
+  experiments.  The first three arguments (sigma, k, min) that I use are 
+  0.8 100 100.  I've included a pl script for segmenting a directory
+  that you may find useful.  You can also use a different program to create 
+  the superpixel image.  That image should have a different RGB color for 
+  each segment without drawn boundaries between segments.  
+
+
+(C) Derek Hoiem, Carnegie Mellon University, 2007
+ 
