@@ -44,7 +44,7 @@ for k = 1:length(lines)
 end
 % disp(round([vp1; vp2; vp3]));
 % disp([normal_vec{1}; normal_vec{2}; normal_vec{3}]);
-
+hold off;
 %% distorted
 % figure; imshow(rectimg); hold on;
 % plot(vp1(1), vp1(2), 'r.', 'MarkerSize',20);
