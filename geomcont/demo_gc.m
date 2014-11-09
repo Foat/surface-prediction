@@ -1,7 +1,8 @@
+% use only for indoor scenes
 im=imread('testimg.jpg');
 imsize=size(im);
 imgs=im2superpixels(im);
-geom_labels=getgc(im,imgs);
+geom_labels=getgc(im,imgs,0);
 
 romap=zeros(imsize);
 % ceiling, floor
