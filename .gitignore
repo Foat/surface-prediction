@@ -1,3 +1,7 @@
+# build files
 *.mex*
 *.o
 *.a
+
+# temp folders
+_temp*
