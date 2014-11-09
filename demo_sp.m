@@ -28,7 +28,7 @@ imsize2=size(img2);
 %% find lines, vp using Tardif approach (faster, but needs EM approach)
 % [vp,f,linesmore] = main(img2);
 
-%% Compute vanishing point and focal length (Lee et. al)
+%% Compute vanishing point and focal length (Lee et al.)
 [lines, linesmore] = generate_lines(img2);
 % disp_lines(img, lines);
 [vp, f] = compute_vp(lines, imsize2);
