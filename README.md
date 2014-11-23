@@ -38,7 +38,7 @@ We provide annotated data for [Delage et al. dataset] and [York Urban database].
 ## Additional information
 The paper was originally presented on the [SUAS 2014] workshop.
 
-The project page will be available soon on my [home site].
+The project page is available [here](http://foat.me/articles/surface-prediction/).
 
 [home site]: http://foat.me
 [SUAS 2014]: http://www.cvc.uab.es/adas/suas2014/
