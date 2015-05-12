@@ -1,7 +1,5 @@
 ## Introduction
-This is the source code for my "Surface prediction for a single image of urban scenes" paper. The paper will be published soon.
-
-If you use this software or annotated data, please cite the [paper]:
+This is the source code for my "Surface prediction for a single image of urban scenes" paper. If you use this software or annotated data, please cite the [paper]:
 
 F. Akhmadeev. Surface prediction for a single image of urban scenes. *Computer Vision - [ACCV 2014] Workshops*, volume 9008 of *Lecture Notes in Computer Science*, pages 369–382. Springer International Publishing, 2015.
 
