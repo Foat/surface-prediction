@@ -1,9 +1,9 @@
 ## Introduction
 This is the source code for my "Surface prediction for a single image of urban scenes" paper. The paper will be published soon.
 
-If you use this software or annotated data, please cite the paper (citation will be updated after publication in LNCS):
+If you use this software or annotated data, please cite the [paper]:
 
-F. Akhmadeev. "Surface prediction for a single image of urban scenes." Workshop on Scene Understanding for Autonomous Systems (ACCV Workshops), ACCV 2014.
+F. Akhmadeev. Surface prediction for a single image of urban scenes. *Computer Vision - [ACCV 2014] Workshops*, volume 9008 of *Lecture Notes in Computer Science*, pages 369–382. Springer International Publishing, 2015.
 
 ## How to run
 
@@ -38,7 +38,7 @@ We provide annotated data for [Delage et al. dataset] and [York Urban database].
 ## Additional information
 The paper was originally presented on the [SUAS 2014] workshop.
 
-The project page is available [here](http://foat.me/articles/surface-prediction/).
+The project page is available [here](http://foat.me/portfolio/surface-prediction/).
 
 [home site]: http://foat.me
 [SUAS 2014]: http://www.cvc.uab.es/adas/suas2014/
@@ -51,3 +51,5 @@ The project page is available [here](http://foat.me/articles/surface-prediction/
 
 [Delage et al. dataset]: http://web.hec.ca/pages/erick.delage/indoor3drecon/index.htm
 [York Urban database]: http://www.elderlab.yorku.ca/YorkUrbanDB/
+
+[paper]: http://dx.doi.org/10.1007/978-3-319-16628-5_27
